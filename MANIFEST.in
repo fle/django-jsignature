@@ -1,4 +1,2 @@
 include README.rst LICENSE
-recursive-include jsignature/templates *.html
 recursive-include jsignature/static *.js
-recursive-include jsignature/static *.css
