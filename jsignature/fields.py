@@ -6,7 +6,8 @@ import json
 from django.db import models
 from django.core import validators
 from django.core.exceptions import ValidationError
-from .forms import JSignatureField as JSignatureFormField
+from .forms import (JSignatureField as JSignatureFormField,
+JSIGNATURE_EMPTY_VALUES)
 
 class JSignatureField(models.Field):
     """
@@ -23,7 +24,7 @@ class JSignatureField(models.Field):
         Validates that the input can be red as a JSON object. Returns a Python
         datetime.date object.
         """
-        if value in validators.EMPTY_VALUES:
+        if value in JSIGNATURE_EMPTY_VALUES:
             return None
         elif isinstance(value, list):
             return value
@@ -33,10 +34,7 @@ class JSignatureField(models.Field):
             raise ValidationError('Invalid JSON format.')
 
     def get_prep_value(self, value):
-        return self.to_python(value)
-
-    def get_db_prep_value(self, value, connection, prepared=False):
-        if value in validators.EMPTY_VALUES:
+        if value in JSIGNATURE_EMPTY_VALUES:
             return None
         elif isinstance(value, basestring):
             return value

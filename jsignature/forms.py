@@ -8,6 +8,8 @@ from django.core import validators
 from django.core.exceptions import ValidationError
 from .widgets import JSignatureWidget
 
+JSIGNATURE_EMPTY_VALUES = validators.EMPTY_VALUES + ('[]', )
+
 class JSignatureField(Field):
     """
     A field handling a signature capture field with with jSignature
@@ -19,7 +21,7 @@ class JSignatureField(Field):
             Validates that the input can be red as a JSON object. Returns a Python
             datetime.date object.
             """
-            if value in validators.EMPTY_VALUES:
+            if value in JSIGNATURE_EMPTY_VALUES:
                 return None
             try:
                 return json.loads(value)
