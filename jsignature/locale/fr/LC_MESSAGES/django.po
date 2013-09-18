@@ -1,0 +1,30 @@
+# French translation for django-jsignature package.
+# Copyright (C) 2013
+# This file is distributed under the same license as the django-jsignature package.
+# Florent Lebreton <florent.lebreton@makina-corpus.com>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-09-18 11:10+0200\n"
+"PO-Revision-Date: 2013-09-18 11:13+0100\n"
+"Last-Translator: Florent Lebreton <lebreton.florent@wanadoo.fr>\n"
+"Language-Team: contact@makina-corpus.com\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: mixins.py:13
+msgid "Signature"
+msgstr "Signature"
+
+#: mixins.py:17
+msgid "Signature date"
+msgstr "Date de signature"
+
+#: widgets.py:65
+msgid "Reset"
+msgstr "Réinitialiser"
