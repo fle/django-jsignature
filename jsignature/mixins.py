@@ -26,7 +26,6 @@ class JSignatureFieldsMixin(models.Model):
         is_new = self.pk is None
         original = not is_new and self.__class__.objects.get(pk=self.pk) or None
 
-        print self.signature
         if self.signature:
             if is_new or self.signature != original.signature:
                 self.signature_date = datetime.now()
