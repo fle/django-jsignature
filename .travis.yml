@@ -1,7 +1,6 @@
 language: python
 
 python:
-  - "2.6"
   - "2.7"
 
 env:
@@ -9,7 +8,7 @@ env:
   - DJANGO_VERSION=1.5
 
 install:
-  pip install -r requirements.txt --use-mirrors
-  pip install -q Django==$DJANGO_VERSION --use-mirrors
+  - pip install -r requirements.txt --use-mirrors
+  - pip install -q Django==$DJANGO_VERSION --use-mirrors
 
 script: python quicktest.py jsignature
