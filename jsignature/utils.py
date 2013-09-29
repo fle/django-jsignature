@@ -24,8 +24,8 @@ def draw_signature(data, as_file=False):
         raise ValueError
 
     # Compute box
-    width = max(chain(*[d['x'] for d in data])) + 10
-    height = max(chain(*[d['y'] for d in data])) + 10
+    width = max(chain(*[d['x'] for d in drawing])) + 10
+    height = max(chain(*[d['y'] for d in drawing])) + 10
 
     # Draw image
     im = Image.new("RGBA", (width*AA, height*AA))
@@ -45,7 +45,7 @@ def draw_signature(data, as_file=False):
     if as_file:
         ret = im._dump(format='PNG')
     else:
-        ret = img
+        ret = im
 
     return ret
 
