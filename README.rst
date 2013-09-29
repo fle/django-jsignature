@@ -86,11 +86,21 @@ JSignature plugin options are available in python:
 
     JSignatureField(widget=JSignatureWidget(jsignature_attrs={'color': '#CCC'}))
 
+Available settings are:
+
+* ``JSIGNATURE_WIDTH`` (width)
+* ``JSIGNATURE_HEIGHT`` (height)
+* ``JSIGNATURE_COLOR`` (color)
+* ``JSIGNATURE_BACKGROUND_COLOR`` (background-color)
+* ``JSIGNATURE_DECOR_COLOR`` (decor-color)
+* ``JSIGNATURE_LINE_WIDTH`` (lineWidth)
+* ``JSIGNATURE_UNDO_BUTTON`` (UndoButton)
+
 ==================
 IN YOUR MODELS
 ==================
 
-If you wan to store signatures, provided mixin gives a `signature` and a `signature_date` that update themselves:
+If you wan to store signatures, provided mixin gives a ``signature`` and a ``signature_date`` that update themselves:
 
 ::
 
