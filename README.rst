@@ -9,6 +9,10 @@ It provides:
 .. image:: https://travis-ci.org/fle/django-jsignature.png?branch=master
         :target: https://travis-ci.org/fle/django-jsignature
 
+.. image:: https://coveralls.io/repos/fle/django-jsignature/badge.png
+       :target: https://coveralls.io/r/fle/django-jsignature
+
+
 ==================
 INSTALL
 ==================
