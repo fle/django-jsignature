@@ -48,3 +48,11 @@ class JSignatureFieldsMixinTest(SimpleTestCase):
         i.save()
         i = JSignatureTestModel.objects.get(pk=i.pk)
         self.assertEqual(date.today(), i.signature_date.date())
+
+        # If sinature is set to None, it must be the same for signature_date
+        i = JSignatureTestModel(signature=signature_value)
+        i.save()
+        i.signature = None
+        i.save()
+        i = JSignatureTestModel.objects.get(pk=i.pk)
+        self.assertIsNone(i.signature_date)

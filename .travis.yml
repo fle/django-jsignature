@@ -10,5 +10,6 @@ env:
 install:
   - pip install -r requirements.txt --use-mirrors
   - pip install -q Django==$DJANGO_VERSION --use-mirrors
+  - pip install coverage
 
-script: python quicktest.py jsignature
+script: coverage run quicktest.py jsignature
