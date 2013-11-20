@@ -6,8 +6,10 @@ from django.test import SimpleTestCase
 
 from ..utils import draw_signature
 
-DUMMY_VALUE = [{"x":[205,210],"y":[59,63]},{"x":[205,207],"y":[67,64]}]
+DUMMY_VALUE = [{"x": [205, 210], "y": [59, 63]},
+               {"x": [205, 207], "y": [67, 64]}]
 DUMMY_STR_VALUE = json.dumps(DUMMY_VALUE)
+
 
 class UtilsTest(SimpleTestCase):
 

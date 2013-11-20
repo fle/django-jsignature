@@ -7,6 +7,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from .fields import JSignatureField
 
+
 class JSignatureFieldsMixin(models.Model):
     """ Mixin class providing fields to store a signature with jSignature """
     signature = JSignatureField(
@@ -24,7 +25,7 @@ class JSignatureFieldsMixin(models.Model):
     def save(self, *args, **kwargs):
 
         is_new = self.pk is None
-        original = not is_new and self.__class__.objects.get(pk=self.pk) or None
+        original = not is_new and self.__class__.objects.get(pk=self.pk)
 
         if self.signature:
             if is_new or self.signature != original.signature:

@@ -1,5 +1,4 @@
 import json
-import django
 from django.test import SimpleTestCase
 from django.core.exceptions import ValidationError
 
@@ -44,7 +43,7 @@ class JSignatureWidgetTest(SimpleTestCase):
         for val in ['', [], '[]']:
             self.assertEqual('[]', w.prep_value(val))
         # Correct values
-        val = [{"x":[1,2], "y":[3,4]}]
+        val = [{"x": [1, 2], "y": [3, 4]}]
         val_prep = w.prep_value(val)
         self.assertIsInstance(val_prep, basestring)
         self.assertEquals(val, json.loads(val_prep))

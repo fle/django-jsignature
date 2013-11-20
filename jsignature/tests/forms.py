@@ -1,5 +1,3 @@
-import json
-import django
 from django.test import SimpleTestCase
 from django.core.exceptions import ValidationError
 
@@ -20,7 +18,7 @@ class JSignatureFormFieldTest(SimpleTestCase):
             self.assertIsNone(f.to_python(val))
         # Correct values
         val = '[{"x":[1,2], "y":[3,4]}]'
-        self.assertEquals([{'x':[1,2], 'y':[3,4]}], f.to_python(val))
+        self.assertEquals([{'x': [1, 2], 'y': [3, 4]}], f.to_python(val))
         # Incorrect values
         val = 'foo'
         self.assertRaises(ValidationError, f.to_python, val)

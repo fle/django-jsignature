@@ -10,6 +10,7 @@ from .widgets import JSignatureWidget
 
 JSIGNATURE_EMPTY_VALUES = validators.EMPTY_VALUES + ('[]', )
 
+
 class JSignatureField(Field):
     """
     A field handling a signature capture field with with jSignature
@@ -18,8 +19,8 @@ class JSignatureField(Field):
 
     def to_python(self, value):
             """
-            Validates that the input can be red as a JSON object. Returns a Python
-            datetime.date object.
+            Validates that the input can be red as a JSON object.
+            Returns a Python list (JSON object unserialized).
             """
             if value in JSIGNATURE_EMPTY_VALUES:
                 return None

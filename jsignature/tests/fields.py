@@ -1,9 +1,7 @@
 import json
-import django
 from django.test import SimpleTestCase
 from django.core.exceptions import ValidationError
 
-from ..widgets import JSignatureWidget
 from ..fields import JSignatureField
 from ..forms import JSignatureField as JSignatureFormField
 
@@ -16,7 +14,7 @@ class JSignatureFieldTest(SimpleTestCase):
         for val in ['', [], '[]']:
             self.assertIsNone(f.to_python(val))
         # Correct values
-        val = [{"x":[1,2], "y":[3,4]}]
+        val = [{"x": [1, 2], "y": [3, 4]}]
         self.assertEquals(val, f.to_python(val))
         val_str = '[{"x":[1,2], "y":[3,4]}]'
         self.assertEquals(val, f.to_python(val_str))
@@ -30,7 +28,7 @@ class JSignatureFieldTest(SimpleTestCase):
         for val in ['', [], '[]']:
             self.assertIsNone(f.get_prep_value(val))
         # Correct values
-        val = [{"x":[1,2], "y":[3,4]}]
+        val = [{"x": [1, 2], "y": [3, 4]}]
         val_prep = f.get_prep_value(val)
         self.assertIsInstance(val_prep, basestring)
         self.assertEquals(val, json.loads(val_prep))
@@ -44,4 +42,5 @@ class JSignatureFieldTest(SimpleTestCase):
 
     def test_formfield(self):
         f = JSignatureField()
-        self.assertTrue(issubclass(f.formfield().__class__, JSignatureFormField))
+        cls = f.formfield().__class__
+        self.assertTrue(issubclass(cls, JSignatureFormField))

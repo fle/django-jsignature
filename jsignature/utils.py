@@ -3,12 +3,11 @@
     https://github.com/zivezab/django-autograph/blob/master/autograph/utils.py
 """
 import json
-import cStringIO
 from itertools import chain
-from tempfile import NamedTemporaryFile
 from PIL import Image, ImageDraw, ImageOps
 
-AA = 5 # super sampling gor antialiasing
+AA = 5  # super sampling gor antialiasing
+
 
 def draw_signature(data, as_file=False):
     """ Draw signature based on lines stored in json_string.
@@ -32,7 +31,8 @@ def draw_signature(data, as_file=False):
     draw = ImageDraw.Draw(im)
     for line in drawing:
         len_line = len(line['x'])
-        points = [(line['x'][i]*AA, line['y'][i]*AA) for i in range(0, len_line)]
+        points = [(line['x'][i]*AA, line['y'][i]*AA)
+                  for i in range(0, len_line)]
         draw.line(points, fill="#000", width=2*AA)
     im = ImageOps.expand(im)
     # Smart crop
@@ -48,4 +48,3 @@ def draw_signature(data, as_file=False):
         ret = im
 
     return ret
-

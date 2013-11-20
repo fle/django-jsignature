@@ -12,6 +12,7 @@ from jsignature.settings import JSIGNATURE_DEFAULT_CONFIG
 
 JSIGNATURE_EMPTY_VALUES = validators.EMPTY_VALUES + ('[]', )
 
+
 class JSignatureWidget(HiddenInput):
     """
     A widget handling a signature capture field with with jSignature
@@ -67,9 +68,12 @@ class JSignatureWidget(HiddenInput):
         hidden_input = super(JSignatureWidget, self).render(name, value, attrs)
         div = u'<div id="%s" class="jsign-container"></div>' % jsign_id
         clr = u'<input type="button" value="%s" class="btn">' % _('Reset')
-        js  = u'$("#%s").jSignature(%s);' % (jsign_id, json.dumps(jsignature_config))
-        js += u'$("#%s").jSignature("setData", %s,"native");' % (jsign_id, value)
-        js  = u'<script type="text/javascript">%s</script>' % js
-        out = u'<div class="jsign-wrapper">%s%s%s%s</div>' % (hidden_input, div, clr, js)
+        js = u'$("#%s").jSignature(%s);' % (
+            jsign_id, json.dumps(jsignature_config))
+        js += u'$("#%s").jSignature("setData", %s,"native");' % (
+            jsign_id, value)
+        js = u'<script type="text/javascript">%s</script>' % js
+        out = u'<div class="jsign-wrapper">%s%s%s%s</div>' % (
+            hidden_input, div, clr, js)
 
         return mark_safe(out)

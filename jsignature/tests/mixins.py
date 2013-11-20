@@ -1,11 +1,8 @@
-import json
-import django
-from datetime import datetime, date
+from datetime import date
 from django.conf import settings
 from django.db.models import loading
 from django.test import SimpleTestCase
 from django.core.management import call_command
-from django.core.exceptions import ValidationError
 
 from .models import JSignatureTestModel
 
@@ -24,7 +21,7 @@ class JSignatureFieldsMixinTest(SimpleTestCase):
 
     def test_save(self):
         # If an object is created signed, signature date must be set
-        signature_value = [{"x":[1,2], "y":[3,4]}]
+        signature_value = [{"x": [1, 2], "y": [3, 4]}]
         i = JSignatureTestModel(signature=signature_value)
         i.save()
         i = JSignatureTestModel.objects.get(pk=i.pk)
@@ -40,8 +37,9 @@ class JSignatureFieldsMixinTest(SimpleTestCase):
         self.assertEqual(date(2013, 1, 1), i.signature_date.date())
 
         # If signature changes, signature date must be updated too
-        new_signature_value = [{"x":[5,6], "y":[7,8]}]
-        i = JSignatureTestModel(signature=signature_value, signature_date=date(2013, 1, 1))
+        new_signature_value = [{"x": [5, 6], "y": [7, 8]}]
+        i = JSignatureTestModel(signature=signature_value,
+                                signature_date=date(2013, 1, 1))
         i.save()
         i.signature_date = date(2013, 1, 1)
         i.signature = new_signature_value
