@@ -17,6 +17,10 @@ class JSignatureWidget(HiddenInput):
     A widget handling a signature capture field with with jSignature
     """
 
+    # Actually, this widget has a display so we want it to behave like a
+    # normal field, not a hidden one
+    is_hidden = False
+
     class Media:
         js = ('js/jSignature.min.js',
               'js/django_jsignature.js')
