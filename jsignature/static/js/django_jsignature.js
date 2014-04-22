@@ -3,7 +3,7 @@ $(document).ready(function() {
   /* Each time user is done drawing a stroke, update value of hidden input */
   $(document).delegate(".jsign-container", "change", function(e) {
     var jSignature_data = $(this).jSignature('getData', 'native');
-    var django_field_name = $(this).attr('id').split('_')[1];
+    var django_field_name = $(this).attr('id').split(/_(.+)/)[1];
     $('#id_' + django_field_name).val(JSON.stringify(jSignature_data));
   });
 
