@@ -60,7 +60,6 @@ class JSignatureWidget(HiddenInput):
         # Build config
         jsign_id = self.build_jsignature_id(name)
         jsignature_config = self.build_jsignature_config()
-        print jsignature_config
 
         # Prepare value
         value = self.prep_value(value)
