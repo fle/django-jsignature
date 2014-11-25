@@ -67,7 +67,9 @@ class JSignatureWidget(HiddenInput):
         # Build output
         hidden_input = super(JSignatureWidget, self).render(name, value, attrs)
         div = u'<div id="%s" class="jsign-container"></div>' % jsign_id
-        clr = u'<input type="button" value="%s" class="btn">' % _('Reset')
+        clr = u''
+        if JSIGNATURE_DEFAULT_CONFIG.ResetButton:
+            clr = u'<input type="button" value="%s" class="btn">' % _('Reset')
         js = u'$("#%s").jSignature(%s);' % (
             jsign_id, json.dumps(jsignature_config))
         js += u'$("#%s").jSignature("setData", %s,"native");' % (
