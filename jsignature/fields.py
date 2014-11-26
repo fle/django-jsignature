@@ -48,6 +48,8 @@ class JSignatureField(models.Field):
         defaults.update(kwargs)
         return super(JSignatureField, self).formfield(**defaults)
 
-
-from south.modelsinspector import add_introspection_rules
-add_introspection_rules([], ["jsignature.fields.JSignatureField"])
+try:
+    from south.modelsinspector import add_introspection_rules
+    add_introspection_rules([], ["jsignature.fields.JSignatureField"])
+except ImportError:
+    pass
