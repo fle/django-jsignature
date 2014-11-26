@@ -50,6 +50,20 @@ USAGE
     class SignatureForm(forms.Form):
         signature = JSignatureField()
 
+* In your template
+
+::
+
+    {{ form.media }}
+    <form action="." method="POST">
+        {% for field in form %}
+            {{ field.label_tag }}
+            {{ field }}
+        {% endfor %}
+        <input type="submit" value="Save"/>
+        {% csrf_token %}
+    </form>
+
 * Render image after form validation:
 
 ::
