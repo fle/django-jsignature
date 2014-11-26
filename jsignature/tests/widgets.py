@@ -1,4 +1,6 @@
 import json
+from pyquery import PyQuery as pq
+
 from django.test import SimpleTestCase
 from django.core.exceptions import ValidationError
 
@@ -59,6 +61,5 @@ class JSignatureWidgetTest(SimpleTestCase):
         w = JSignatureWidget()
         output = w.render(name='foo', value=None)
         # Almost useless :/
-        self.assertIn('class="jsign-wrapper"', output)
-        self.assertIn('type="hidden"', output)
-        self.assertIn('type="text/javascript"', output)
+        self.assertEqual(1, len(pq('.jsign-wrapper', output)))
+        self.assertEqual(1, len(pq('[type=hidden]', output)))

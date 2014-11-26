@@ -3,6 +3,8 @@
     with jSignature jQuery plugin
 """
 import json
+
+from django.template.loader import render_to_string
 from django.forms.widgets import HiddenInput
 from django.core import validators
 from django.core.exceptions import ValidationError
@@ -65,15 +67,13 @@ class JSignatureWidget(HiddenInput):
         value = self.prep_value(value)
 
         # Build output
-        hidden_input = super(JSignatureWidget, self).render(name, value, attrs)
-        div = u'<div id="%s" class="jsign-container"></div>' % jsign_id
-        clr = u'<input type="button" value="%s" class="btn">' % _('Reset')
-        js = u'$("#%s").jSignature(%s);' % (
-            jsign_id, json.dumps(jsignature_config))
-        js += u'$("#%s").jSignature("setData", %s,"native");' % (
-            jsign_id, value)
-        js = u'<script type="text/javascript">%s</script>' % js
-        out = u'<div class="jsign-wrapper">%s%s%s%s</div>' % (
-            hidden_input, div, clr, js)
+        context = {
+            'hidden': super(JSignatureWidget, self).render(name, value, attrs),
+            'jsign_id': jsign_id,
+            'reset_btn_text': _('Reset'),
+            'config': mark_safe(json.dumps(jsignature_config)),
+            'value': mark_safe(value),
+        }
+        out = render_to_string('jsignature/widget.html', context)
 
         return mark_safe(out)

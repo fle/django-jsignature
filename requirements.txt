@@ -1,2 +1,3 @@
 south
 pillow
+pyquery
