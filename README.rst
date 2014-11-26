@@ -101,6 +101,7 @@ Available settings are:
 * ``JSIGNATURE_DECOR_COLOR`` (decor-color)
 * ``JSIGNATURE_LINE_WIDTH`` (lineWidth)
 * ``JSIGNATURE_UNDO_BUTTON`` (UndoButton)
+* ``JSIGNATURE_RESET_BUTTON`` (ResetButton)
 
 ==================
 IN YOUR MODELS

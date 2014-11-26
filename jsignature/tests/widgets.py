@@ -63,3 +63,12 @@ class JSignatureWidgetTest(SimpleTestCase):
         # Almost useless :/
         self.assertEqual(1, len(pq('.jsign-wrapper', output)))
         self.assertEqual(1, len(pq('[type=hidden]', output)))
+
+    def test_render_reset_button(self):
+        w = JSignatureWidget(jsignature_attrs={'ResetButton': True})
+        output = w.render(name='foo', value=None)
+        self.assertEqual(1, len(pq('[type=button]', output)))
+
+        w = JSignatureWidget(jsignature_attrs={'ResetButton': False})
+        output = w.render(name='foo', value=None)
+        self.assertEqual(0, len(pq('[type=button]', output)))

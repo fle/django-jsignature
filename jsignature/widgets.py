@@ -71,7 +71,8 @@ class JSignatureWidget(HiddenInput):
             'hidden': super(JSignatureWidget, self).render(name, value, attrs),
             'jsign_id': jsign_id,
             'reset_btn_text': _('Reset'),
-            'config': mark_safe(json.dumps(jsignature_config)),
+            'config': jsignature_config,
+            'js_config': mark_safe(json.dumps(jsignature_config)),
             'value': mark_safe(value),
         }
         out = render_to_string('jsignature/widget.html', context)
