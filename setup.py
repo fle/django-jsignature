@@ -8,10 +8,11 @@ setup(
     version='0.7.6',
     author='Florent Lebreton',
     author_email='florent.lebreton@makina-corpus.com',
-    url='https://github.com/makinacorpus/django-jsignature',
-    download_url="http://pypi.python.org/pypi/django-jsignature/",
+    url='https://github.com/fle/django-jsignature',
+    download_url="https://github.com/fle/django-jsignature/tarball/0.7.6",
     description="Use jSignature jQuery plugin in your django projects",
-    long_description=open(os.path.join(here, 'README.rst')).read(),
+    long_description=open(os.path.join(here, 'README.rst')).read() + '\n\n' +
+		     open(os.path.join(here, 'CHANGES')).read(),
     license='LPGL, see LICENSE file.',
     install_requires=['Django'],
     packages=find_packages(),
@@ -24,6 +25,6 @@ setup(
         'Intended Audience :: Developers',
         'Environment :: Web Environment',
         'Framework :: Django',
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Programming Language :: Python :: 2.7'],
 )

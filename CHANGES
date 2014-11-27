@@ -1,0 +1,15 @@
+=========
+CHANGELOG
+=========
+
+0.7.6 (2014-11-26)
+==================
+
+** New features **
+
+- A setting to display (or not) the reset button has been added (@jsayles)
+
+** Internal changes **
+
+- Rendering is now based on a template (@andybak)
+- Javascript is properly initialized (@andybak)

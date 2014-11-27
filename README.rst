@@ -13,7 +13,7 @@ It provides:
        :target: https://coveralls.io/r/fle/django-jsignature
 
 
-.. image:: screen.png
+.. image:: https://github.com/fle/django-jsignature/blob/master/screen.png
 
 ==================
 INSTALL
@@ -23,7 +23,7 @@ For now:
 
 ::
 
-    pip install https://github.com/fle/django-jsignature/archive/master.zip
+    pip install django-jsignature
 
 ==================
 USAGE

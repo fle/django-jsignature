@@ -1,4 +1,4 @@
-include README.rst LICENSE
+include README.rst LICENSE CHANGES
 recursive-include jsignature/static *.js
 recursive-include jsignature/locale *.mo
 recursive-include jsignature/templates *.html
