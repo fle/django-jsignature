@@ -2,6 +2,15 @@
 CHANGELOG
 =========
 
+0.8 (2014-12-04)
+==================
+
+** New **
+
+- Add support for Python 3 (@Gagaro)
+- Add support for Django 1.7 (@Gagaro)
+
+
 0.7.6 (2014-11-26)
 ==================
 
