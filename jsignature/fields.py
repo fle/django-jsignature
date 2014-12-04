@@ -3,19 +3,21 @@
     with jSignature jQuery plugin
 """
 import json
+import six
+
 from django.db import models
 from django.core.exceptions import ValidationError
+
 from .forms import (
     JSignatureField as JSignatureFormField,
     JSIGNATURE_EMPTY_VALUES)
 
 
-class JSignatureField(models.Field):
+class JSignatureField(six.with_metaclass(models.SubfieldBase, models.Field)):
     """
     A model field handling a signature captured with jSignature
     """
     description = "A signature captured with jSignature"
-    __metaclass__ = models.SubfieldBase
 
     def get_internal_type(self):
         return 'TextField'
@@ -37,7 +39,7 @@ class JSignatureField(models.Field):
     def get_prep_value(self, value):
         if value in JSIGNATURE_EMPTY_VALUES:
             return None
-        elif isinstance(value, basestring):
+        elif isinstance(value, six.string_types):
             return value
         elif isinstance(value, list):
             return json.dumps(value)

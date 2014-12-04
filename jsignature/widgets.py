@@ -3,11 +3,13 @@
     with jSignature jQuery plugin
 """
 import json
+import six
 
 from django.template.loader import render_to_string
 from django.forms.widgets import HiddenInput
 from django.core import validators
 from django.core.exceptions import ValidationError
+
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from jsignature.settings import JSIGNATURE_DEFAULT_CONFIG
@@ -51,7 +53,7 @@ class JSignatureWidget(HiddenInput):
         """ Prepare value before effectively render widget """
         if value in JSIGNATURE_EMPTY_VALUES:
             return "[]"
-        elif isinstance(value, basestring):
+        elif isinstance(value, six.string_types):
             return value
         elif isinstance(value, list):
             return json.dumps(value)

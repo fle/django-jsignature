@@ -13,22 +13,24 @@ DUMMY_STR_VALUE = json.dumps(DUMMY_VALUE)
 
 class UtilsTest(SimpleTestCase):
 
-    def test_inputs(self):
-        # Bad str value
+    def test_inputs_bad_str_value(self):
         self.assertRaises(ValueError, draw_signature, 'foo_bar')
-        # Bad type value
+
+    def test_inputs_bad_type_value(self):
         self.assertRaises(ValueError, draw_signature, object())
-        # Good list value
+
+    def test_inputs_good_list_value(self):
         draw_signature(DUMMY_VALUE)
-        # Good str value
+
+    def test_inputs_good_str_value(self):
         draw_signature(DUMMY_STR_VALUE)
 
-    def test_outputs(self):
-        # As a file
+    def test_outputs_as_file(self):
         output = draw_signature(DUMMY_VALUE, as_file=True)
         self.assertTrue(os.path.isfile(output))
         self.assertIsNotNone(imghdr.what(output))
-        # As an Image
+
+    def test_outputs_as_image(self):
         output = draw_signature(DUMMY_VALUE)
         self.assertTrue(issubclass(output.__class__, Image.Image))
         self.assertTrue(all(output.getbbox()))

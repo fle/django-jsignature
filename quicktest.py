@@ -3,6 +3,7 @@ import sys
 import argparse
 from django.conf import settings
 
+
 class QuickDjangoTest(object):
     """
     A quick way to run the Django test suite without a fully-configured project.
@@ -16,8 +17,6 @@ class QuickDjangoTest(object):
     """
     DIRNAME = os.path.dirname(__file__)
     INSTALLED_APPS = (
-        'django.contrib.contenttypes',
-        'django.contrib.sessions',
     )
 
     def __init__(self, *args, **kwargs):
@@ -29,7 +28,10 @@ class QuickDjangoTest(object):
         Fire up the Django test suite developed for version 1.2
         """
         settings.configure(
-            DATABASES={
+            TEMPLATE_DIRS = ('jsignature/templates/',),
+            ROOT_URLCONF = 'jsignature.tests',
+            DEBUG = True,
+            DATABASES = {
                 'default': {
                     'ENGINE': 'django.db.backends.sqlite3',
                     'NAME': os.path.join(self.DIRNAME, 'database.db'),
@@ -39,11 +41,27 @@ class QuickDjangoTest(object):
                     'PORT': '',
                 }
             },
-            INSTALLED_APPS=self.INSTALLED_APPS + self.apps,
+            MIDDLEWARE_CLASSES = (
+                'django.contrib.sessions.middleware.SessionMiddleware',
+                'django.middleware.common.CommonMiddleware',
+                'django.middleware.csrf.CsrfViewMiddleware',
+                'django.contrib.auth.middleware.AuthenticationMiddleware',
+                'django.contrib.messages.middleware.MessageMiddleware',
+            ),
+            INSTALLED_APPS = self.INSTALLED_APPS + self.apps
         )
-        from django.test.simple import DjangoTestSuiteRunner
-        failures = DjangoTestSuiteRunner().run_tests(self.apps, verbosity=1)
-        if failures:  # pragma: no cover
+        # Setup is needed for Django >= 1.7
+        import django
+        if hasattr(django, 'setup'):
+            django.setup()
+        try:
+            from django.test.runner import DiscoverRunner
+            failures = DiscoverRunner().run_tests(self.apps, verbosity=1)
+        except ImportError:
+            # DjangoTestSuiteRunner has been deprecated in Django 1.7
+            from django.test.simple import DjangoTestSuiteRunner
+            failures = DjangoTestSuiteRunner().run_tests(self.apps, verbosity=1)
+        if failures: # pragma: no cover
             sys.exit(failures)
 
 if __name__ == '__main__':
