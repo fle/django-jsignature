@@ -1,5 +1,6 @@
 import json
 import six
+
 from django.test import SimpleTestCase
 from django.core.exceptions import ValidationError
 
