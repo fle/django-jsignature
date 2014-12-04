@@ -29,14 +29,14 @@ after_success:
 matrix:
     exclude:
         - python: 3.2
-          env: DJANGO_VERSION=1.4
+          env: DJANGO_VERSION=1.4 MODULE=jsignature
         - python: 3.3
-          env: DJANGO_VERSION=1.4
+          env: DJANGO_VERSION=1.4 MODULE=jsignature
         - python: 3.4
-          env: DJANGO_VERSION=1.4
+          env: DJANGO_VERSION=1.4 MODULE=jsignature
         - python: 3.4
-          env: DJANGO_VERSION=1.5
+          env: DJANGO_VERSION=1.5 MODULE=jsignature
         - python: 3.4
-          env: DJANGO_VERSION=1.6
+          env: DJANGO_VERSION=1.6 MODULE=jsignature.tests
         - python: 2.6
-          env: DJANGO_VERSION=1.7
+          env: DJANGO_VERSION=1.7 MODULE=jsignature.tests
