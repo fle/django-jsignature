@@ -11,14 +11,17 @@ class JSignatureFormFieldTest(SimpleTestCase):
         f = JSignatureField()
         self.assertIsInstance(f.widget, JSignatureWidget)
 
-    def test_to_python(self):
+    def test_to_python_empty_values(self):
         f = JSignatureField()
-        # Empty values
         for val in ['', [], '[]']:
             self.assertIsNone(f.to_python(val))
-        # Correct values
+
+    def test_to_python_correct_values(self):
+        f = JSignatureField()
         val = '[{"x":[1,2], "y":[3,4]}]'
         self.assertEquals([{'x': [1, 2], 'y': [3, 4]}], f.to_python(val))
-        # Incorrect values
+
+    def test_to_python_incorrect_values(self):
+        f = JSignatureField()
         val = 'foo'
         self.assertRaises(ValidationError, f.to_python, val)

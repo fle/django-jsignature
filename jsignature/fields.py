@@ -3,6 +3,7 @@
     with jSignature jQuery plugin
 """
 import json
+import six
 from django.db import models
 from django.core.exceptions import ValidationError
 from .forms import (
@@ -37,7 +38,7 @@ class JSignatureField(models.Field):
     def get_prep_value(self, value):
         if value in JSIGNATURE_EMPTY_VALUES:
             return None
-        elif isinstance(value, basestring):
+        elif isinstance(value, six.string_types):
             return value
         elif isinstance(value, list):
             return json.dumps(value)
