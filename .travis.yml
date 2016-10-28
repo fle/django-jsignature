@@ -13,8 +13,8 @@ env:
   - DJANGO_VERSION=1.10 MODULE=jsignature.tests
 
 install:
-  - pip install -r requirements.txt --use-mirrors
-  - pip install -q Django==$DJANGO_VERSION --use-mirrors
+  - pip install -r requirements.txt
+  - pip install -q Django==$DJANGO_VERSION
   - pip install coverage
 
 script: coverage run quicktest.py $MODULE
