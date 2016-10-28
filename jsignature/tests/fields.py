@@ -31,6 +31,21 @@ class JSignatureFieldTest(SimpleTestCase):
         val = 'foo'
         self.assertRaises(ValidationError, f.to_python, val)
 
+    def test_from_db_value_empty(self):
+        f = JSignatureField()
+        self.assertIsNone(f.from_db_value(''))
+
+    def test_from_db_value_correct_value_json(self):
+        f = JSignatureField()
+        val = [{"x": [1, 2], "y": [3, 4]}]
+        val_str = '[{"x":[1,2], "y":[3,4]}]'
+        self.assertEquals(val, f.from_db_value(val_str))
+
+    def test_from_db_value_incorrect_value(self):
+        f = JSignatureField()
+        val = 'foo'
+        self.assertRaises(ValidationError, f.to_python, val)
+
     def test_get_prep_value_empty(self):
         f = JSignatureField()
         for val in ['', [], '[]']:
