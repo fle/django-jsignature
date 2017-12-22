@@ -1,21 +1,20 @@
 language: python
 
 python:
-  - 2.6
   - 2.7
-  - 3.2
   - 3.3
   - 3.4
+  - 3.5
 
 env:
-  - DJANGO_VERSION=1.4 MODULE=jsignature
-  - DJANGO_VERSION=1.5 MODULE=jsignature
-  - DJANGO_VERSION=1.6 MODULE=jsignature.tests
   - DJANGO_VERSION=1.7 MODULE=jsignature.tests
+  - DJANGO_VERSION=1.8 MODULE=jsignature.tests
+  - DJANGO_VERSION=1.9 MODULE=jsignature.tests
+  - DJANGO_VERSION=1.10 MODULE=jsignature.tests
 
 install:
-  - pip install -r requirements.txt --use-mirrors
-  - pip install -q Django==$DJANGO_VERSION --use-mirrors
+  - pip install -r requirements.txt
+  - pip install -q Django==$DJANGO_VERSION
   - pip install coverage
 
 script: coverage run quicktest.py $MODULE
@@ -24,19 +23,10 @@ after_success:
  - pip install coveralls
  - coveralls
 
-# We need to exclude old versions of Django for tests with python 3.
-# We need to exclude old versions of Python for tests with Django >= 1.7.
+# We need to exclude old versions of Python for tests with Django >= 1.9.
 matrix:
     exclude:
-        - python: 3.2
-          env: DJANGO_VERSION=1.4 MODULE=jsignature
         - python: 3.3
-          env: DJANGO_VERSION=1.4 MODULE=jsignature
-        - python: 3.4
-          env: DJANGO_VERSION=1.4 MODULE=jsignature
-        - python: 3.4
-          env: DJANGO_VERSION=1.5 MODULE=jsignature
-        - python: 3.4
-          env: DJANGO_VERSION=1.6 MODULE=jsignature.tests
-        - python: 2.6
-          env: DJANGO_VERSION=1.7 MODULE=jsignature.tests
+          env: DJANGO_VERSION=1.9 MODULE=jsignature.tests
+        - python: 3.3
+          env: DJANGO_VERSION=1.10 MODULE=jsignature.tests

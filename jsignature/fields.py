@@ -13,7 +13,7 @@ from .forms import (
     JSIGNATURE_EMPTY_VALUES)
 
 
-class JSignatureField(six.with_metaclass(models.SubfieldBase, models.Field)):
+class JSignatureField(models.Field):
     """
     A model field handling a signature captured with jSignature
     """
@@ -23,14 +23,18 @@ class JSignatureField(six.with_metaclass(models.SubfieldBase, models.Field)):
         return 'TextField'
 
     def to_python(self, value):
-        """
-        Validates that the input can be red as a JSON object. Returns a Python
-        datetime.date object.
-        """
         if value in JSIGNATURE_EMPTY_VALUES:
             return None
         elif isinstance(value, list):
             return value
+        try:
+            return json.loads(value)
+        except ValueError:
+            raise ValidationError('Invalid JSON format.')
+
+    def from_db_value(self, value, expression, connection, context):
+        if value in JSIGNATURE_EMPTY_VALUES:
+            return None
         try:
             return json.loads(value)
         except ValueError:
@@ -50,8 +54,3 @@ class JSignatureField(six.with_metaclass(models.SubfieldBase, models.Field)):
         defaults.update(kwargs)
         return super(JSignatureField, self).formfield(**defaults)
 
-try:
-    from south.modelsinspector import add_introspection_rules
-    add_introspection_rules([], ["jsignature.fields.JSignatureField"])
-except ImportError:
-    pass
