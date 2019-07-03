@@ -13,7 +13,7 @@ from .forms import (
     JSIGNATURE_EMPTY_VALUES)
 
 
-class JSignatureField(six.with_metaclass(models.SubfieldBase, models.Field)):
+class JSignatureField(models.Field):
     """
     A model field handling a signature captured with jSignature
     """

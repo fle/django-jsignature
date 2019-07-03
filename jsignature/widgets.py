@@ -59,7 +59,7 @@ class JSignatureWidget(HiddenInput):
             return json.dumps(value)
         raise ValidationError('Invalid format.')
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, renderer=None):
         """ Render widget """
         # Build config
         jsign_id = self.build_jsignature_id(name)
