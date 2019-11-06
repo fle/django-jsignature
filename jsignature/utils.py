@@ -14,9 +14,11 @@ def draw_signature(data, as_file=False):
         `data` can be a json object (list in fact) or a json string
         if `as_file` is True, a temp file is returned instead of Image instance
     """
+    def _remove_empty_pts(pt):
+        return {'x': list(filter(None, pt['x'])), 'y': list(filter(None, pt['y']))}
 
     if type(data) is str:
-        drawing = json.loads(data)
+        drawing = json.loads(data, object_hook=_remove_empty_pts)
     elif type(data) is list:
         drawing = data
     else:
