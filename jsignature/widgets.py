@@ -27,7 +27,8 @@ class JSignatureWidget(HiddenInput):
     is_hidden = False
 
     class Media:
-        js = ('js/jSignature.min.js',
+        js = ('admin/js/jquery.init.js',
+              'js/jSignature.min.js',
               'js/django_jsignature.js')
 
     def __init__(self, attrs=None, jsignature_attrs=None):
