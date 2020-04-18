@@ -5,13 +5,13 @@
 import json
 
 from django.template.loader import render_to_string
-from django.forms.widgets import HiddenInput
+from django import forms
 from django.core import validators
 from django.core.exceptions import ValidationError
 
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
-from jsignature.settings import JSIGNATURE_DEFAULT_CONFIG
+from jsignature.settings import JSIGNATURE_DEFAULT_CONFIG, JSIGNATURE_JQUERY
 
 JSIGNATURE_EMPTY_VALUES = validators.EMPTY_VALUES + ('[]', )
 
@@ -23,7 +23,7 @@ except ImportError:
     string_types = str
 
 
-class JSignatureWidget(HiddenInput):
+class JSignatureWidget(forms.HiddenInput):
     """
     A widget handling a signature capture field with with jSignature
     """
@@ -32,10 +32,21 @@ class JSignatureWidget(HiddenInput):
     # normal field, not a hidden one
     is_hidden = False
 
-    class Media:
-        js = ('admin/js/jquery.init.js',
-              'js/jSignature.min.js',
-              'js/django_jsignature.js')
+    @property
+    def media(self):
+        files = ()
+        if JSIGNATURE_JQUERY == 'admin':
+            files = (
+                'admin/js/jquery.init.js',
+                'js/jsignature_admin_init.js',
+            )
+        elif JSIGNATURE_JQUERY != 'custom':
+            files = (JSIGNATURE_JQUERY,)
+        files += (
+            'js/jSignature.min.js',
+            'js/django_jsignature.js',
+        )
+        return forms.Media(js=files)
 
     def __init__(self, attrs=None, jsignature_attrs=None):
         super(JSignatureWidget, self).__init__(attrs)

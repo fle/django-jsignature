@@ -82,6 +82,13 @@ USAGE
                 # or as a file
                 signature_file_path = draw_signature(signature, as_file=True)
 
+*   By default, jSignature is made to work outside of admin, requiring that
+    you include the jQuery library in your ``<head>``.
+
+    If you want to use jSignature in the Django admin site, set the
+    ``JSIGNATURE_JQUERY`` setting to ``admin``. Otherwise if set to any url
+    pointing to jQuery, it will be automatically included.
+
 ==================
 CUSTOMIZATION
 ==================

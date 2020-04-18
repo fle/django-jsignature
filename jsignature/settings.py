@@ -17,6 +17,9 @@ JSIGNATURE_UNDO_BUTTON = getattr(
 JSIGNATURE_RESET_BUTTON = getattr(
     settings, 'JSIGNATURE_RESET_BUTTON', True)
 
+JSIGNATURE_JQUERY = getattr(
+    settings, 'JSIGNATURE_JQUERY', 'custom')
+
 JSIGNATURE_DEFAULT_CONFIG = {
     'width': JSIGNATURE_WIDTH,
     'height': JSIGNATURE_HEIGHT,

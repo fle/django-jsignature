@@ -14,10 +14,10 @@ from .forms import (
 
 try:
     from django.utils import six
+
     string_types = six.string_types
 except ImportError:
     string_types = str
-
 
 
 class JSignatureField(models.Field):
