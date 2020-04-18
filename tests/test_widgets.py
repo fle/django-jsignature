@@ -34,6 +34,13 @@ class JSignatureWidgetTest(SimpleTestCase):
         media_js = list(media.render_js())
         self.assertEqual(4, len(media_js))
 
+    @override_settings(JSIGNATURE_JQUERY='https://code.jquery.com/jquery-3.5.0.min.js')
+    def test_media_custom_jquery(self):
+        widget = JSignatureWidget()
+        media = widget.media
+        media_js = list(media.render_js())
+        self.assertEqual(3, len(media_js))
+
     def test_init(self):
         w = JSignatureWidget()
         self.assertEquals({}, w.jsignature_attrs)
