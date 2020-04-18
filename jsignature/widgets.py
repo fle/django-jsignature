@@ -4,6 +4,7 @@
 """
 import json
 
+from django.conf import settings
 from django.template.loader import render_to_string
 from django import forms
 from django.core import validators
@@ -11,7 +12,7 @@ from django.core.exceptions import ValidationError
 
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
-from jsignature.settings import JSIGNATURE_DEFAULT_CONFIG, JSIGNATURE_JQUERY
+from jsignature.settings import JSIGNATURE_DEFAULT_CONFIG
 
 JSIGNATURE_EMPTY_VALUES = validators.EMPTY_VALUES + ('[]', )
 
@@ -34,6 +35,7 @@ class JSignatureWidget(forms.HiddenInput):
 
     @property
     def media(self):
+        JSIGNATURE_JQUERY = getattr(settings, 'JSIGNATURE_JQUERY', 'custom')
         files = ()
         if JSIGNATURE_JQUERY == 'admin':
             files = (

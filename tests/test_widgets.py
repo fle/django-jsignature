@@ -1,7 +1,7 @@
 import json
 from pyquery import PyQuery as pq
 
-from django.test import SimpleTestCase
+from django.test import SimpleTestCase, override_settings
 from django.core.exceptions import ValidationError
 
 from jsignature.widgets import JSignatureWidget
@@ -16,17 +16,23 @@ except ImportError:
 
 
 class JSignatureWidgetTest(SimpleTestCase):
-
     def test_default_media(self):
         widget = JSignatureWidget()
         media = widget.media
         media_js = list(media.render_js())
-        self.assertEqual(3, len(media_js))
+        self.assertEqual(2, len(media_js))
         media_js_str = "".join(media_js)
         self.assertIn('jSignature.min.js', media_js_str)
         self.assertIn('django_jsignature.js', media_js_str)
         media_css = list(media.render_css())
         self.assertEquals([], media_css)
+
+    @override_settings(JSIGNATURE_JQUERY='admin')
+    def test_media_in_admin(self):
+        widget = JSignatureWidget()
+        media = widget.media
+        media_js = list(media.render_js())
+        self.assertEqual(4, len(media_js))
 
     def test_init(self):
         w = JSignatureWidget()
