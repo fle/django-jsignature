@@ -2,6 +2,7 @@
     A django mixin providing fields to store a signature captured
     with jSignature jQuery plugin
 """
+import json
 from datetime import datetime
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -28,7 +29,7 @@ class JSignatureFieldsMixin(models.Model):
         original = not is_new and self.__class__.objects.get(pk=self.pk)
 
         if self.signature:
-            if is_new or self.signature != original.signature:
+            if is_new or json.dumps(self.signature) != original.signature:
                 self.signature_date = datetime.now()
         else:
             self.signature_date = None

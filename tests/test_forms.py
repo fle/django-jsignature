@@ -1,8 +1,8 @@
 from django.test import SimpleTestCase
 from django.core.exceptions import ValidationError
 
-from ..widgets import JSignatureWidget
-from ..forms import JSignatureField
+from jsignature.widgets import JSignatureWidget
+from jsignature.forms import JSignatureField
 
 
 class JSignatureFormFieldTest(SimpleTestCase):

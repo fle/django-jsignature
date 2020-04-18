@@ -1,24 +1,10 @@
 from datetime import date
-from django.conf import settings
-from django.db.models import loading
-from django.test import SimpleTestCase
-from django.core.management import call_command
+from django.test import TestCase
 
 from .models import JSignatureTestModel
 
 
-class JSignatureFieldsMixinTest(SimpleTestCase):
-
-    def setUp(self):
-        self.old_installed_apps = settings.INSTALLED_APPS
-        settings.INSTALLED_APPS = list(settings.INSTALLED_APPS)
-        settings.INSTALLED_APPS.append('jsignature.tests')
-        loading.cache.loaded = False
-        call_command('syncdb', verbosity=0)
-
-    def tearDown(self):
-        settings.INSTALLED_APPS = self.old_installed_apps
-
+class JSignatureFieldsMixinTest(TestCase):
     def test_save_create(self):
         # If an object is created signed, signature date must be set
         signature_value = [{"x": [1, 2], "y": [3, 4]}]

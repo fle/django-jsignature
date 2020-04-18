@@ -4,8 +4,8 @@ import six
 from django.test import SimpleTestCase
 from django.core.exceptions import ValidationError
 
-from ..fields import JSignatureField
-from ..forms import JSignatureField as JSignatureFormField
+from jsignature.fields import JSignatureField
+from jsignature.forms import JSignatureField as JSignatureFormField
 
 
 class JSignatureFieldTest(SimpleTestCase):

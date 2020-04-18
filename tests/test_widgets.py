@@ -5,8 +5,8 @@ import six
 from django.test import SimpleTestCase
 from django.core.exceptions import ValidationError
 
-from ..widgets import JSignatureWidget
-from ..settings import JSIGNATURE_HEIGHT
+from jsignature.widgets import JSignatureWidget
+from jsignature.settings import JSIGNATURE_HEIGHT
 
 
 class JSignatureWidgetTest(SimpleTestCase):
@@ -15,7 +15,7 @@ class JSignatureWidgetTest(SimpleTestCase):
         widget = JSignatureWidget()
         media = widget.media
         media_js = list(media.render_js())
-        self.assertEqual(2, len(media_js))
+        self.assertEqual(3, len(media_js))
         media_js_str = "".join(media_js)
         self.assertIn('jSignature.min.js', media_js_str)
         self.assertIn('django_jsignature.js', media_js_str)
