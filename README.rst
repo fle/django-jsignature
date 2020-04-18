@@ -35,8 +35,8 @@ USAGE
 
     # settings.py
     INSTALLED_APPS = (
-    ...
-    'jsignature',
+        ...
+        'jsignature',
     )
 
 * Use provided form field and widget:
@@ -121,7 +121,7 @@ Available settings are:
 IN YOUR MODELS
 ==================
 
-If you wan to store signatures, provided mixin gives a ``signature`` and a ``signature_date`` that update themselves:
+If you want to store signatures, provided mixin gives a ``signature`` and a ``signature_date`` that update themselves:
 
 ::
 
@@ -133,10 +133,33 @@ If you wan to store signatures, provided mixin gives a ``signature`` and a ``sig
 
 
 ==================
+Example project
+==================
+
+If you want to have a demo of this package, just use the example project:
+
+::
+
+    git clone https://github.com/fle/django-jsignature.git
+    cd django-jsignature
+    python -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
+    pip install -e .
+    cd example_project
+    ./manage.py migrate
+    ./manage.py createsuperuser
+
+Fill the user info, launch django with ``./manage.py runserver`` and head over to
+`http://127.0.0.1:8000/ <http://127.0.0.1:8000/>`_ and login with the
+credentials your provided.
+
+==================
 AUTHORS
 ==================
 
     * Florent Lebreton <florent.lebreton@makina-corpus.com>
+    * Sébastien Corbin <sebastien.corbin@makina-corpus.com>
 
 |makinacom|_
 

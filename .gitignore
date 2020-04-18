@@ -3,3 +3,4 @@
 htmlcov
 *.egg-info
 .tox
+example.db
