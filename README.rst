@@ -6,12 +6,17 @@ It provides:
 * A model field to store a captured signature;
 * A mixin adding two fields (signature / signature_date) in any of your Django models.
 
+.. image:: https://img.shields.io/pypi/v/django-jsignature.svg
+    :target: https://pypi.python.org/pypi/django-jsignature/
+    :alt: Latest PyPI version
+
 .. image:: https://travis-ci.org/fle/django-jsignature.png?branch=master
-        :target: https://travis-ci.org/fle/django-jsignature
+    :target: https://travis-ci.org/fle/django-jsignature
+    :alt: Build status
 
 .. image:: https://coveralls.io/repos/fle/django-jsignature/badge.png
-       :target: https://coveralls.io/r/fle/django-jsignature
-
+    :target: https://coveralls.io/r/fle/django-jsignature
+    :alt: Coverage status
 
 .. image:: https://github.com/fle/django-jsignature/blob/master/screen.png
 
