@@ -1,12 +1,18 @@
 import json
 from pyquery import PyQuery as pq
-import six
 
 from django.test import SimpleTestCase
 from django.core.exceptions import ValidationError
 
 from jsignature.widgets import JSignatureWidget
 from jsignature.settings import JSIGNATURE_HEIGHT
+
+try:
+    from django.utils import six
+
+    string_types = six.string_types
+except ImportError:
+    string_types = str
 
 
 class JSignatureWidgetTest(SimpleTestCase):
@@ -49,7 +55,7 @@ class JSignatureWidgetTest(SimpleTestCase):
         w = JSignatureWidget()
         val = [{"x": [1, 2], "y": [3, 4]}]
         val_prep = w.prep_value(val)
-        self.assertIsInstance(val_prep, six.string_types)
+        self.assertIsInstance(val_prep, string_types)
         self.assertEquals(val, json.loads(val_prep))
 
     def test_prep_value_correct_values_json(self):
@@ -57,7 +63,7 @@ class JSignatureWidgetTest(SimpleTestCase):
         val = [{"x": [1, 2], "y": [3, 4]}]
         val_str = '[{"x":[1,2], "y":[3,4]}]'
         val_prep = w.prep_value(val_str)
-        self.assertIsInstance(val_prep, six.string_types)
+        self.assertIsInstance(val_prep, string_types)
         self.assertEquals(val, json.loads(val_prep))
 
     def test_prep_value_incorrect_values(self):

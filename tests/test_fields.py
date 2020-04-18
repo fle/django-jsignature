@@ -1,11 +1,17 @@
 import json
-import six
 
 from django.test import SimpleTestCase
 from django.core.exceptions import ValidationError
 
 from jsignature.fields import JSignatureField
 from jsignature.forms import JSignatureField as JSignatureFormField
+
+try:
+    from django.utils import six
+
+    string_types = six.string_types
+except ImportError:
+    string_types = str
 
 
 class JSignatureFieldTest(SimpleTestCase):
@@ -40,7 +46,7 @@ class JSignatureFieldTest(SimpleTestCase):
         f = JSignatureField()
         val = [{"x": [1, 2], "y": [3, 4]}]
         val_prep = f.get_prep_value(val)
-        self.assertIsInstance(val_prep, six.string_types)
+        self.assertIsInstance(val_prep, string_types)
         self.assertEquals(val, json.loads(val_prep))
 
     def test_get_prep_value_correct_values_json(self):
@@ -48,7 +54,7 @@ class JSignatureFieldTest(SimpleTestCase):
         val = [{"x": [1, 2], "y": [3, 4]}]
         val_str = '[{"x":[1,2], "y":[3,4]}]'
         val_prep = f.get_prep_value(val_str)
-        self.assertIsInstance(val_prep, six.string_types)
+        self.assertIsInstance(val_prep, string_types)
         self.assertEquals(val, json.loads(val_prep))
 
     def test_get_prep_value_incorrect_values(self):
