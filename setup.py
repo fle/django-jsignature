@@ -14,8 +14,8 @@ setup(
     long_description=open(os.path.join(here, 'README.rst')).read() + '\n\n' +
         open(os.path.join(here, 'CHANGES')).read(),
     license='LPGL, see LICENSE file.',
-    install_requires=['Django', 'pillow'],
-    packages=find_packages(),
+    install_requires=['Django>=1.11', 'pillow'],
+    packages=find_packages(exclude=['example_project*', 'tests']),
     include_package_data=True,
     zip_safe=False,
     classifiers=[

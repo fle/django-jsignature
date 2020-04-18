@@ -4,3 +4,5 @@ htmlcov
 *.egg-info
 .tox
 example.db
+/dist
+/build
