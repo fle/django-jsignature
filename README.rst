@@ -5,6 +5,7 @@ It provides:
 * A form field and a form widget to handle jquery plugin through a Django form;
 * A model field to store a captured signature;
 * A mixin adding two fields (signature / signature_date) in any of your Django models.
+* A template filter to render signatures as base64 image urls.
 
 .. image:: https://img.shields.io/pypi/v/django-jsignature.svg
     :target: https://pypi.python.org/pypi/django-jsignature/
