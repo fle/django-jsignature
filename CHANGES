@@ -2,6 +2,15 @@
 CHANGELOG
 =========
 
+0.10 (2020-07-26)
+==================
+
+** New **
+
+- Add template filter to easily render a signature structure as base64 url.
+- Add a full example of front-office usage.
+
+
 0.9 (2020-04-18)
 ==================
 
