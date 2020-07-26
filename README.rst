@@ -22,17 +22,15 @@ It provides:
 .. image:: https://github.com/fle/django-jsignature/blob/master/screen.png
 
 ==================
-INSTALL
+Installation
 ==================
-
-For now:
 
 ::
 
     pip install django-jsignature
 
 ==================
-USAGE
+Usage
 ==================
 
 * Add ``jsignature`` to your ``INSTALLED_APPS``:
@@ -45,48 +43,37 @@ USAGE
         'jsignature',
     )
 
-* Use provided form field and widget:
+* Use provided model field (for easy storage):
 
 ::
 
-    # forms.py
-    from django import forms
-    from jsignature.forms import JSignatureField
+    # models.py
+    from django.db import models
+    from jsignature.fields import JSignatureField
 
-    class SignatureForm(forms.Form):
+    class SignatureModel(models.Model):
         signature = JSignatureField()
 
-* In your template
+* In your form template
 
 ::
 
     {{ form.media }}
-    <form action="." method="POST">
-        {% for field in form %}
-            {{ field.label_tag }}
-            {{ field }}
-        {% endfor %}
-        <input type="submit" value="Save"/>
+    <form action="" method="post">
+        {{ form }}
+        <input type="submit" value="Save" />
         {% csrf_token %}
     </form>
 
-* Render image after form validation:
+* Render image from db value in your display template:
 
 ::
 
-    # views.py
-    from jsignature.utils import draw_signature
-    from myapp.forms import SignatureForm
+    {# yourtemplate.html #}
+    {% load jsignature_filters %}
 
-    def my_view(request):
-        form = SignatureForm(request.POST or None)
-        if form.is_valid():
-            signature = form.cleaned_data.get('signature')
-            if signature:
-                # as an image
-                signature_picture = draw_signature(signature)
-                # or as a file
-                signature_file_path = draw_signature(signature, as_file=True)
+    <img src="{{ obj.signature|signature_base64 }}" alt="{{ obj }}" />
+
 
 *   By default, jSignature is made to work outside of admin, requiring that
     you include the jQuery library in your ``<head>``.
@@ -95,8 +82,11 @@ USAGE
     ``JSIGNATURE_JQUERY`` setting to ``admin``. Otherwise if set to any url
     pointing to jQuery, it will be automatically included.
 
+    It is strongly suggested to take example from ``example_project``, which is
+    `located in this repo <https://github.com/fle/django-jsignature/tree/master/example_project>`_
+
 ==================
-CUSTOMIZATION
+Customization
 ==================
 
 JSignature plugin options are available in python:
@@ -131,10 +121,11 @@ Available settings are:
 * ``JSIGNATURE_RESET_BUTTON`` (ResetButton)
 
 ==================
-IN YOUR MODELS
+In your models
 ==================
 
-If you want to store signatures, provided mixin gives a ``signature`` and a ``signature_date`` that update themselves:
+If you want to store signatures easily, a provided mixin gives a ``signature``
+and a ``signature_date`` that update themselves:
 
 ::
 
@@ -143,6 +134,41 @@ If you want to store signatures, provided mixin gives a ``signature`` and a ``si
 
     class JSignatureModel(JSignatureFieldsMixin):
         name = models.CharField()
+
+
+==================
+In your forms
+==================
+
+* If you need more precise handling of the form field, you can use it directly:
+
+::
+
+    # forms.py
+    from django import forms
+    from jsignature.forms import JSignatureField
+
+    class SignatureForm(forms.Form):
+        signature = JSignatureField()
+
+
+* And upon saving, have direct access to the image with ``draw_signature()``
+
+::
+
+    # views.py
+    from jsignature.utils import draw_signature
+    from myapp.forms import SignatureForm
+
+    def my_view(request):
+        form = SignatureForm(request.POST or None)
+        if form.is_valid():
+            signature = form.cleaned_data.get('signature')
+            if signature:
+                # as an image
+                signature_picture = draw_signature(signature)
+                # or as a file
+                signature_file_path = draw_signature(signature, as_file=True)
 
 
 ==================
@@ -163,16 +189,17 @@ If you want to have a demo of this package, just use the example project:
     ./manage.py migrate
     ./manage.py createsuperuser
 
-Fill the user info, launch django with ``./manage.py runserver`` and head over to
-`http://127.0.0.1:8000/ <http://127.0.0.1:8000/>`_ and login with the
-credentials your provided.
+Fill the user info, launch django with ``./manage.py runserver`` and head over
+to `http://127.0.0.1:8000/ <http://127.0.0.1:8000/>`_, you can also
+`login to the admin <http://127.0.0.1:8000/admin>`_ with the credentials your
+provided.
 
 ==================
-AUTHORS
+Authors
 ==================
 
-    * Florent Lebreton <florent.lebreton@makina-corpus.com>
-    * Sébastien Corbin <sebastien.corbin@makina-corpus.com>
+    * Florent Lebreton <florent.lebreton@makina-corpus.com> (original author)
+    * Sébastien Corbin <sebastien.corbin@makina-corpus.com> (maintainer)
 
 |makinacom|_
 

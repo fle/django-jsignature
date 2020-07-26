@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block extra_media %}
+  {{ form.media }}
+{% endblock %}
+
+{% block content %}
+  <form action="" method="post">
+    {{ form }}
+    <input type="submit" value="Save" class="btn btn-success" />
+    <a href="{% url 'list' %}" class="btn btn-danger">Cancel</a>
+    {% csrf_token %}
+  </form>
+{% endblock %}
