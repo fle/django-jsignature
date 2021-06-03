@@ -1,2 +1,3 @@
 pillow
-pyquery
+pyquery<1.4.2; python_version<="2.7"
+pyquery>=1.4.2; python_version>"2.7"
