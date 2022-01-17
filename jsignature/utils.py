@@ -14,9 +14,13 @@ def draw_signature(data, as_file=False):
         `data` can be a json object (list in fact) or a json string
         if `as_file` is True, a temp file is returned instead of Image instance
     """
+
     def _remove_empty_pts(pt):
-        return {'x': list(filter(lambda n: n is not None, pt['x'])), 'y': list(filter(lambda n: n is not None, pt['y']))}
-    
+        return {
+            'x': list(filter(lambda n: n is not None, pt['x'])),
+            'y': list(filter(lambda n: n is not None, pt['y']))
+        }
+
     if type(data) is str:
         drawing = json.loads(data, object_hook=_remove_empty_pts)
     elif type(data) is list:
@@ -29,13 +33,13 @@ def draw_signature(data, as_file=False):
     height = int(round(max(chain(*[d['y'] for d in drawing])))) + 10
 
     # Draw image
-    im = Image.new("RGBA", (width*AA, height*AA))
+    im = Image.new("RGBA", (width * AA, height * AA))
     draw = ImageDraw.Draw(im)
     for line in drawing:
         len_line = len(line['x'])
-        points = [(line['x'][i]*AA, line['y'][i]*AA)
+        points = [(line['x'][i] * AA, line['y'][i] * AA)
                   for i in range(0, len_line)]
-        draw.line(points, fill="#000", width=2*AA)
+        draw.line(points, fill="#000", width=2 * AA)
     im = ImageOps.expand(im)
     # Smart crop
     bbox = im.getbbox()
