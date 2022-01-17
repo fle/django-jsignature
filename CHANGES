@@ -2,6 +2,18 @@
 CHANGELOG
 =========
 
+0.11 (2022-01-17)
+==================
+
+** New **
+
+- Django 4.0 compatibility.
+- Moved to Github Actions for testing.
+- Added flake8 in CI.
+- Dropped support for python < 3.6
+- Dropped support for Django 1.11, 2.0, 2.1, 3.0, 3.1.
+
+
 0.10 (2020-07-26)
 ==================
 
