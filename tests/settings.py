@@ -2,6 +2,8 @@ import os
 
 DEBUG = True
 
+USE_TZ = True
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SECRET_KEY = 'thisisntactuallysecretatall'

@@ -25,7 +25,7 @@ class JSignatureWidgetTest(SimpleTestCase):
         self.assertIn('jSignature.min.js', media_js_str)
         self.assertIn('django_jsignature.js', media_js_str)
         media_css = list(media.render_css())
-        self.assertEquals([], media_css)
+        self.assertEqual([], media_css)
 
     @override_settings(JSIGNATURE_JQUERY='admin')
     def test_media_in_admin(self):
@@ -43,10 +43,10 @@ class JSignatureWidgetTest(SimpleTestCase):
 
     def test_init(self):
         w = JSignatureWidget()
-        self.assertEquals({}, w.jsignature_attrs)
+        self.assertEqual({}, w.jsignature_attrs)
         given_attrs = {'width': 300, 'height': 100}
         w = JSignatureWidget(jsignature_attrs=given_attrs)
-        self.assertEquals(given_attrs, w.jsignature_attrs)
+        self.assertEqual(given_attrs, w.jsignature_attrs)
 
     def test_build_jsignature_id(self):
         w = JSignatureWidget()
@@ -69,7 +69,7 @@ class JSignatureWidgetTest(SimpleTestCase):
         val = [{"x": [1, 2], "y": [3, 4]}]
         val_prep = w.prep_value(val)
         self.assertIsInstance(val_prep, string_types)
-        self.assertEquals(val, json.loads(val_prep))
+        self.assertEqual(val, json.loads(val_prep))
 
     def test_prep_value_correct_values_json(self):
         w = JSignatureWidget()
@@ -77,7 +77,7 @@ class JSignatureWidgetTest(SimpleTestCase):
         val_str = '[{"x":[1,2], "y":[3,4]}]'
         val_prep = w.prep_value(val_str)
         self.assertIsInstance(val_prep, string_types)
-        self.assertEquals(val, json.loads(val_prep))
+        self.assertEqual(val, json.loads(val_prep))
 
     def test_prep_value_incorrect_values(self):
         w = JSignatureWidget()
