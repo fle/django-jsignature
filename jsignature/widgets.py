@@ -11,7 +11,7 @@ from django.core import validators
 from django.core.exceptions import ValidationError
 
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from jsignature.settings import JSIGNATURE_DEFAULT_CONFIG
 
 JSIGNATURE_EMPTY_VALUES = validators.EMPTY_VALUES + ('[]', )

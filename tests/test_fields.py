@@ -24,13 +24,13 @@ class JSignatureFieldTest(SimpleTestCase):
     def test_to_python_correct_value_python(self):
         f = JSignatureField()
         val = [{"x": [1, 2], "y": [3, 4]}]
-        self.assertEquals(val, f.to_python(val))
+        self.assertEqual(val, f.to_python(val))
 
     def test_to_python_correct_value_json(self):
         f = JSignatureField()
         val = [{"x": [1, 2], "y": [3, 4]}]
         val_str = '[{"x":[1,2], "y":[3,4]}]'
-        self.assertEquals(val, f.to_python(val_str))
+        self.assertEqual(val, f.to_python(val_str))
 
     def test_to_python_incorrect_value(self):
         f = JSignatureField()
@@ -47,7 +47,7 @@ class JSignatureFieldTest(SimpleTestCase):
         val = [{"x": [1, 2], "y": [3, 4]}]
         val_prep = f.get_prep_value(val)
         self.assertIsInstance(val_prep, string_types)
-        self.assertEquals(val, json.loads(val_prep))
+        self.assertEqual(val, json.loads(val_prep))
 
     def test_get_prep_value_correct_values_json(self):
         f = JSignatureField()
@@ -55,7 +55,7 @@ class JSignatureFieldTest(SimpleTestCase):
         val_str = '[{"x":[1,2], "y":[3,4]}]'
         val_prep = f.get_prep_value(val_str)
         self.assertIsInstance(val_prep, string_types)
-        self.assertEquals(val, json.loads(val_prep))
+        self.assertEqual(val, json.loads(val_prep))
 
     def test_get_prep_value_incorrect_values(self):
         f = JSignatureField()
