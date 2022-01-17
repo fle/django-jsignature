@@ -11,12 +11,12 @@ It provides:
     :target: https://pypi.python.org/pypi/django-jsignature/
     :alt: Latest PyPI version
 
-.. image:: https://travis-ci.org/fle/django-jsignature.png?branch=master
-    :target: https://travis-ci.org/fle/django-jsignature
+.. image:: https://github.com/fle/django-jsignature/actions/workflows/actions.yml/badge.svg
+    :target: https://github.com/fle/django-jsignature/actions
     :alt: Build status
 
-.. image:: https://coveralls.io/repos/fle/django-jsignature/badge.png
-    :target: https://coveralls.io/r/fle/django-jsignature
+.. image:: https://coveralls.io/repos/github/fle/django-jsignature/badge.svg?branch=master
+    :target: https://coveralls.io/github/fle/django-jsignature?branch=master
     :alt: Coverage status
 
 .. image:: https://github.com/fle/django-jsignature/blob/master/screen.png
