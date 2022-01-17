@@ -18,13 +18,13 @@ class JSignatureField(Field):
     widget = JSignatureWidget()
 
     def to_python(self, value):
-            """
-            Validates that the input can be red as a JSON object.
-            Returns a Python list (JSON object unserialized).
-            """
-            if value in JSIGNATURE_EMPTY_VALUES:
-                return None
-            try:
-                return json.loads(value)
-            except ValueError:
-                raise ValidationError('Invalid JSON format.')
+        """
+        Validates that the input can be red as a JSON object.
+        Returns a Python list (JSON object unserialized).
+        """
+        if value in JSIGNATURE_EMPTY_VALUES:
+            return None
+        try:
+            return json.loads(value)
+        except ValueError:
+            raise ValidationError('Invalid JSON format.')
