@@ -29,16 +29,25 @@ def draw_signature(data, as_file=False):
         raise ValueError
 
     # Compute box
-    width = int(round(max(chain(*[d['x'] for d in drawing])))) + 10
-    height = int(round(max(chain(*[d['y'] for d in drawing])))) + 10
+    min_width = int(round(min(chain(*[d['x'] for d in drawing])))) - 10
+    max_width = int(round(max(chain(*[d['x'] for d in drawing])))) + 10
+    width = max_width - min_width
+    min_height = int(round(min(chain(*[d['y'] for d in drawing])))) - 10
+    max_height = int(round(max(chain(*[d['y'] for d in drawing])))) + 10
+    height = max_height - min_height
 
     # Draw image
     im = Image.new("RGBA", (width * AA, height * AA))
     draw = ImageDraw.Draw(im)
     for line in drawing:
         len_line = len(line['x'])
-        points = [(line['x'][i] * AA, line['y'][i] * AA)
-                  for i in range(0, len_line)]
+        points = [
+            (
+                (line['x'][i] - min_width) * AA,
+                (line['y'][i] - min_height) * AA
+            )
+            for i in range(0, len_line)
+        ]
         draw.line(points, fill="#000", width=2 * AA)
     im = ImageOps.expand(im)
     # Smart crop
