@@ -55,9 +55,10 @@ def draw_signature(data, as_file=False):
     if bbox:
         im.crop(bbox)
 
+    old_pil_version = int(PIL_VERSION.split('.')[0]) < 10
     im.thumbnail(
         (width, height),
-        Image.ANTIALIAS if PIL_VERSION < '10.0.0' else Image.LANCZOS
+        Image.ANTIALIAS if old_pil_version  else Image.LANCZOS
     )
 
     if as_file:
