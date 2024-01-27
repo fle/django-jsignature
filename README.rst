@@ -35,7 +35,7 @@ Usage
 
 * Add ``jsignature`` to your ``INSTALLED_APPS``:
 
-::
+.. code-block:: python
 
     # settings.py
     INSTALLED_APPS = (
@@ -45,7 +45,7 @@ Usage
 
 * Use provided model field (for easy storage):
 
-::
+.. code-block:: python
 
     # models.py
     from django.db import models
@@ -56,7 +56,7 @@ Usage
 
 * In your form template
 
-::
+.. code-block:: html+django
 
     {{ form.media }}
     <form action="" method="post">
@@ -67,7 +67,7 @@ Usage
 
 * Render image from db value in your display template:
 
-::
+.. code-block:: html+django
 
     {# yourtemplate.html #}
     {% load jsignature_filters %}
@@ -93,7 +93,7 @@ JSignature plugin options are available in python:
 
 * Globally, in your settings:
 
-::
+.. code-block:: python
 
     # settings.py
     JSIGNATURE_WIDTH = 500
@@ -101,7 +101,7 @@ JSignature plugin options are available in python:
 
 * Specifically, in your form:
 
-::
+.. code-block:: python
 
     # forms.py
     from jsignature.forms import JSignatureField
@@ -127,7 +127,7 @@ In your models
 If you want to store signatures easily, a provided mixin gives a ``signature``
 and a ``signature_date`` that update themselves:
 
-::
+.. code-block:: python
 
     from django.db import models
     from jsignature.mixins import JSignatureFieldsMixin
@@ -142,7 +142,7 @@ In your forms
 
 * If you need more precise handling of the form field, you can use it directly:
 
-::
+.. code-block:: python
 
     # forms.py
     from django import forms
@@ -154,7 +154,7 @@ In your forms
 
 * And upon saving, have direct access to the image with ``draw_signature()``
 
-::
+.. code-block:: python
 
     # views.py
     from jsignature.utils import draw_signature
@@ -177,7 +177,7 @@ Example project
 
 If you want to have a demo of this package, just use the example project:
 
-::
+.. code-block:: shell
 
     git clone https://github.com/fle/django-jsignature.git
     cd django-jsignature
