@@ -34,3 +34,5 @@ TEMPLATES = [
         'APP_DIRS': True,
     },
 ]
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
