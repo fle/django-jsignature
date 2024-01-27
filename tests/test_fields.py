@@ -1,17 +1,12 @@
 import json
 
+from django import forms
 from django.test import SimpleTestCase
 from django.core.exceptions import ValidationError
 
 from jsignature.fields import JSignatureField
 from jsignature.forms import JSignatureField as JSignatureFormField
-
-try:
-    from django.utils import six
-
-    string_types = six.string_types
-except ImportError:
-    string_types = str
+from tests.models import JSignatureTestModel
 
 
 class JSignatureFieldTest(SimpleTestCase):
@@ -46,7 +41,7 @@ class JSignatureFieldTest(SimpleTestCase):
         f = JSignatureField()
         val = [{"x": [1, 2], "y": [3, 4]}]
         val_prep = f.get_prep_value(val)
-        self.assertIsInstance(val_prep, string_types)
+        self.assertIsInstance(val_prep, str)
         self.assertEqual(val, json.loads(val_prep))
 
     def test_get_prep_value_correct_values_json(self):
@@ -54,7 +49,7 @@ class JSignatureFieldTest(SimpleTestCase):
         val = [{"x": [1, 2], "y": [3, 4]}]
         val_str = '[{"x":[1,2], "y":[3,4]}]'
         val_prep = f.get_prep_value(val_str)
-        self.assertIsInstance(val_prep, string_types)
+        self.assertIsInstance(val_prep, str)
         self.assertEqual(val, json.loads(val_prep))
 
     def test_get_prep_value_incorrect_values(self):
@@ -66,3 +61,13 @@ class JSignatureFieldTest(SimpleTestCase):
         f = JSignatureField()
         cls = f.formfield().__class__
         self.assertTrue(issubclass(cls, JSignatureFormField))
+
+    def test_modelform_media(self):
+        class TestModelForm(forms.ModelForm):
+            class Meta:
+                model = JSignatureTestModel
+                fields = forms.ALL_FIELDS
+
+        form = TestModelForm()
+        self.assertIn('jSignature.min.js', str(form.media))
+        self.assertIn('django_jsignature.js', str(form.media))

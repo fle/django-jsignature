@@ -21,19 +21,20 @@ def draw_signature(data, as_file=False):
             'y': list(filter(lambda n: n is not None, pt['y']))
         }
 
-    if type(data) is str:
+    if isinstance(data, str):
         drawing = json.loads(data, object_hook=_remove_empty_pts)
-    elif type(data) is list:
+    elif isinstance(data, list):
         drawing = data
     else:
         raise ValueError
 
     # Compute box
-    min_width = int(round(min(chain(*[d['x'] for d in drawing])))) - 10
-    max_width = int(round(max(chain(*[d['x'] for d in drawing])))) + 10
+    padding = 10
+    min_width = int(round(min(chain(*[d['x'] for d in drawing])))) - padding
+    max_width = int(round(max(chain(*[d['x'] for d in drawing])))) + padding
     width = max_width - min_width
-    min_height = int(round(min(chain(*[d['y'] for d in drawing])))) - 10
-    max_height = int(round(max(chain(*[d['y'] for d in drawing])))) + 10
+    min_height = int(round(min(chain(*[d['y'] for d in drawing])))) - padding
+    max_height = int(round(max(chain(*[d['y'] for d in drawing])))) + padding
     height = max_height - min_height
 
     # Draw image
@@ -55,10 +56,10 @@ def draw_signature(data, as_file=False):
     if bbox:
         im.crop(bbox)
 
-    old_pil_version = int(PIL_VERSION.split('.')[0]) < 10
     im.thumbnail(
         (width, height),
-        Image.ANTIALIAS if old_pil_version  else Image.LANCZOS
+        # Image.ANTIALIAS is replaced in PIL 10.0.0
+        Image.ANTIALIAS if int(PIL_VERSION.split('.')[0]) < 10 else Image.LANCZOS
     )
 
     if as_file:
