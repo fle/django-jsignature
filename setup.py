@@ -5,7 +5,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 
 setup(
     name='django-jsignature',
-    version='0.11',
+    version='0.12',
     author='Florent Lebreton',
     author_email='florent.lebreton@makina-corpus.com',
     url='https://github.com/fle/django-jsignature',
@@ -14,7 +14,7 @@ setup(
     long_description=open(os.path.join(here, 'README.rst')).read() + '\n\n' +
         open(os.path.join(here, 'CHANGES')).read(),
     license='LPGL, see LICENSE file.',
-    install_requires=['Django>=4.2', 'pillow<9.1.0', 'pyquery>=1.4.2'],
+    install_requires=['Django>=4.2', 'pillow', 'pyquery>=1.4.2'],
     packages=find_packages(exclude=['example_project*', 'tests']),
     include_package_data=True,
     zip_safe=False,

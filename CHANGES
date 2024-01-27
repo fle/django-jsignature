@@ -2,6 +2,22 @@
 CHANGELOG
 =========
 
+0.12 (2024-01-27)
+==================
+
+** Bug fixed **
+
+- Draw single points
+
+** New **
+
+- Updated Github Actions.
+- Dropped support for python < 3.8
+- Dropped support for Django < 4.2
+- Add support for pillow >= 10
+- Updated jSignature to latest version
+
+
 0.11 (2022-01-17)
 ==================
 
