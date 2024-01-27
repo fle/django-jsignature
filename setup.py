@@ -14,7 +14,7 @@ setup(
     long_description=open(os.path.join(here, 'README.rst')).read() + '\n\n' +
         open(os.path.join(here, 'CHANGES')).read(),
     license='LPGL, see LICENSE file.',
-    install_requires=['Django>=4.2', 'pillow<10', 'pyquery>=1.4.2'],
+    install_requires=['Django>=4.2', 'pillow<9.1.0', 'pyquery>=1.4.2'],
     packages=find_packages(exclude=['example_project*', 'tests']),
     include_package_data=True,
     zip_safe=False,
