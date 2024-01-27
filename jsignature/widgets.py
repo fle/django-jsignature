@@ -17,13 +17,6 @@ from jsignature.settings import JSIGNATURE_DEFAULT_CONFIG
 JSIGNATURE_EMPTY_VALUES = validators.EMPTY_VALUES + ('[]', )
 
 
-try:
-    from django.utils import six
-    string_types = six.string_types
-except ImportError:
-    string_types = str
-
-
 class JSignatureWidget(forms.HiddenInput):
     """
     A widget handling a signature capture field with with jSignature
@@ -73,7 +66,7 @@ class JSignatureWidget(forms.HiddenInput):
         """ Prepare value before effectively render widget """
         if value in JSIGNATURE_EMPTY_VALUES:
             return "[]"
-        elif isinstance(value, string_types):
+        elif isinstance(value, str):
             return value
         elif isinstance(value, list):
             return json.dumps(value)

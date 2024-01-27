@@ -3,8 +3,8 @@
     with jSignature jQuery plugin
 """
 import json
-from datetime import datetime
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from .fields import JSignatureField
 
@@ -30,7 +30,7 @@ class JSignatureFieldsMixin(models.Model):
 
         if self.signature:
             if is_new or json.dumps(self.signature) != original.signature:
-                self.signature_date = datetime.now()
+                self.signature_date = timezone.now()
         else:
             self.signature_date = None
 

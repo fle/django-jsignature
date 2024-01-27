@@ -1,6 +1,5 @@
 import json
 import os
-import imghdr
 from PIL import Image
 from django.test import SimpleTestCase
 
@@ -28,7 +27,9 @@ class UtilsTest(SimpleTestCase):
     def test_outputs_as_file(self):
         output = draw_signature(DUMMY_VALUE, as_file=True)
         self.assertTrue(os.path.isfile(output))
-        self.assertIsNotNone(imghdr.what(output))
+        # Load image with pillow and check PNG
+        im = Image.open(output)
+        self.assertIsNone(im.verify())
 
     def test_outputs_as_image(self):
         output = draw_signature(DUMMY_VALUE)
