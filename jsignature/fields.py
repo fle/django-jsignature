@@ -12,13 +12,6 @@ from .forms import (
     JSIGNATURE_EMPTY_VALUES,
 )
 
-try:
-    from django.utils import six
-
-    string_types = six.string_types
-except ImportError:
-    string_types = str
-
 
 class JSignatureField(models.Field):
     """
@@ -46,7 +39,7 @@ class JSignatureField(models.Field):
     def get_prep_value(self, value):
         if value in JSIGNATURE_EMPTY_VALUES:
             return None
-        elif isinstance(value, string_types):
+        elif isinstance(value, str):
             return value
         elif isinstance(value, list):
             return json.dumps(value)
